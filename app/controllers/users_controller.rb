@@ -17,10 +17,11 @@ class UsersController < ApplicationController
   end
 
   def update
+    # ensure_correct_userをbefore_actionで読んでいるため@userを定義する必要はない
     if @user.update(user_params)
-      redirect_to users_path(@user), notice: "You have updated user successfully."
+      redirect_to user_path(@user.id), notice: "You have updated user successfully."
     else
-      render "show"
+      render :edit
     end
   end
 

@@ -1,0 +1,5 @@
+<%# 配列でインスタンス変数を2つ指定している。コメントは、bookに結びついたbook_commentであるため、book_commentをcreateするためのリクエストは、ルーティングもネスト（親子関係）しているため、2つの情報が必要になる。 %>
+<%= form_with model: [@book, @book_comment] do |f| %>
+  <%= f.text_area :comment, rows: '5', placeholder: "コメントをここに", class: "w-100" %>
+  <%= f.submit "送信する" %>
+<% end %>

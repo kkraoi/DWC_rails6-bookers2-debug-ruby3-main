@@ -1,13 +1,31 @@
 class FavoritesController < ApplicationController
   def create
-    post_image = PostImage.find(params[:post_image_id])
-    favorite = current_user.favorites.new(post_image_id: post_image.id)
-    favorite.save
-    redirect_to post_image_path(post_image)
+    # 投稿された本を定義
+    post_book = Book.find(params[:book_id])
 
-    # post_image = PostImage.find(params[])
+    # user_idが紐づいたfavoritesテーブルに、book_idを投稿された本で登録
+    favorite = current_user.favorites.new(book_id: post_book.id)
+    favorite.save
+
+    # 本のshowページにリダイレクト
+    redirect_to book_path(post_book)
   end
 
   def destroy
+    post_image = PostImage.find(params[:post_image_id])
+    favorite = current_user.favorites.find_by(post_image_id: post_image.id)
+    favorite.destroy
+    redirect_to post_image_path(post_image)
+
+    # 投稿された本を定義
+    post_book = Book.find(params[:book_id])
+
+    # user_idが紐づいたfavoritesテーブルから、投稿された本を探し出し、
+    favorite = current_user.favorites.find_by(book_id: post_book.id)
+    # 削除する
+    favorite.destroy
+
+    # 本のshowページにリダイレクト
+    redirect_to book_path(post_book)
   end
 end

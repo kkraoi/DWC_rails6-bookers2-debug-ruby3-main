@@ -1,4 +1,8 @@
 class UsersController < ApplicationController
+  # ログインしていない時にアクセスするとログイン画面へ遷移
+  before_action :authenticate_user!
+
+  # 他人のアクセス防止
   before_action :ensure_correct_user, only: [:update, :edit]
 
   def show
@@ -13,7 +17,6 @@ class UsersController < ApplicationController
   end
 
   def edit
-    @user = User.find(params[:id])
   end
 
   def update
@@ -21,7 +24,7 @@ class UsersController < ApplicationController
     if @user.update(user_params)
       redirect_to user_path(@user.id), notice: "You have updated user successfully."
     else
-      render :edit
+      render "edit"
     end
   end
 
@@ -31,6 +34,7 @@ class UsersController < ApplicationController
     params.require(:user).permit(:name, :introduction, :profile_image)
   end
 
+  # ユーザをチェック
   def ensure_correct_user
     @user = User.find(params[:id])
     unless @user == current_user

@@ -1,10 +1,10 @@
 class BookCommentsController < ApplicationController
   def create
     # コメント対象の本を定義
-    post_book = Book.find(paramas[:book_id])
+    post_book = Book.find(params[:book_id])
 
     # ユーザーに紐づいたコメントに、対象の本を紐づける
-    comment = current_user.post_comments.new(post_book_params)
+    comment = current_user.book_comments.new(post_book_params)
 
     # コメントのbook_idを登録
     comment.book_id = post_book.id
@@ -18,6 +18,6 @@ class BookCommentsController < ApplicationController
 
   # フォーム入力内容をcommentのみ許容し、それを返す
   def post_book_params
-    params.require(:post_comment).permit(:comment)
+    params.require(:book_comment).permit(:comment)
   end
 end

@@ -8,7 +8,7 @@ class FavoritesController < ApplicationController
     favorite.save
 
     # 本のshowページにリダイレクト
-    redirect_to books_path
+    redirect_to request.referer
   end
 
   def destroy
@@ -21,6 +21,6 @@ class FavoritesController < ApplicationController
     favorite.destroy
 
     # 本のshowページにリダイレクト
-    redirect_to books_path
+    redirect_to request.referer
   end
 end

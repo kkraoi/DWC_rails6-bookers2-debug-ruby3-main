@@ -14,6 +14,11 @@ class BookCommentsController < ApplicationController
     redirect_to request.referer
   end
 
+  def destroy
+    BookComment.find(params[:id]).destroy
+    redirect_to request.referer
+  end
+
   private
 
   # フォーム入力内容をcommentのみ許容し、それを返す

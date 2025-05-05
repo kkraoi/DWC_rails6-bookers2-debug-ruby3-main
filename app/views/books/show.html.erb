@@ -54,6 +54,9 @@
             <%= book_comment.user.name %>
             <%= book_comment.created_at.strftime('%Y/%m/%d') %>
             <%= book_comment.comment %>
+            <% if book_comment.user == current_user %>
+              <%= link_to "削除", book_book_comment_path(book_comment.book, book_comment), method: :delete %>
+            <% end %>
           </li>
         <% end %>
       </ul>

@@ -4,7 +4,7 @@ class RelationshipsController < ApplicationController
 
   def create
     # フォロー対象のユーザーを特定・定義
-    user = user.find(params[:user_id])
+    user = User.find(params[:user_id])
 
     # 指定したユーザーをフォローする
     current_user.follow(user)
@@ -15,7 +15,7 @@ class RelationshipsController < ApplicationController
 
   def destroy
     # フォロー対象のユーザーを特定・定義
-    user = user.find(params[:user_id])
+    user = User.find(params[:user_id])
 
     # 指定したユーザーのフォローを解除する
     current_user.unfollow(user)

@@ -35,11 +35,19 @@ class User < ApplicationRecord
 
   # 指定したユーザーをフォローから外す
   #
-  # @param param [Type] 説明
+  # @param param [Type] フォローから外したいユーザー
   # @return [Void]
   def unfollow(user)
     # active_relationshipsテーブルからフォローをはずしたいユーザーのidを持つ行を削除する
     active_relationships.find_by(followed_id: user.id).destroy
+  end
+
+  # 指定したユーザーをフォローしているかどうか
+  #
+  # @param param [Type] 確かめたいユーザーのインスタンス
+  # @return [Bool] フォローしていればTrue
+  def following?(user)
+    followings.include?(user)
   end
   
   def get_profile_image

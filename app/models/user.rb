@@ -23,7 +23,24 @@ class User < ApplicationRecord
 
   validates :name, length: { minimum: 2, maximum: 20 }, uniqueness: true
   validates :introduction, length: { maximum: 50 }
-  
+
+  # 指定したユーザーをフォローする。
+  #
+  # @param param [User] フォローしたいユーザーのインスタンス
+  # @return [Void]
+  def follow(user)
+    # active_relationshipsテーブルのfollower_idカラムにフォローしたいユーザーのidを登録する
+    active_relationships.create(followed_id: user.id)
+  end
+
+  # 指定したユーザーをフォローから外す
+  #
+  # @param param [Type] 説明
+  # @return [Void]
+  def unfollow(user)
+    # active_relationshipsテーブルからフォローをはずしたいユーザーのidを持つ行を削除する
+    active_relationships.find_by(followed_id: user.id).destroy
+  end
   
   def get_profile_image
     (profile_image.attached?) ? profile_image : 'no_image.jpg'

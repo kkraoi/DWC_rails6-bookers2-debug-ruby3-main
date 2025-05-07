@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   devise_for :users
 
   root to: "homes#top"
-  get "home/about", to: "homes#about"
+  get "/home/about", to: "homes#about"
 
   resources :books, only: [:index,:show,:edit,:create,:destroy,:update] do
     # resource 単数形にすると、/:idがURLに含まれなくなる。

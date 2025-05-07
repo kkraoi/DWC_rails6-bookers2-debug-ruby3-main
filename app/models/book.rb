@@ -12,4 +12,17 @@ class Book < ApplicationRecord
   def favorited_by?(user)
     favorites.exists?(user_id: user.id)
   end
+
+  # 検索方法(method)に応じたレコードを取得する
+  #
+  # @param content [String] 検索するキーワード
+  # @param method [String] 検索方法 ("perfect" | "forward" | "backward" | その他(部分検索))
+  # @return [ActiveRecord::Relation] 検索結果のレコード集合
+  def self.search_for(content, method)
+    search_by_attribute(:title, content, method)
+  end
+
+  def self.search_for(content, method)
+    search_by_attribute(:title, content, method)
+  end
 end

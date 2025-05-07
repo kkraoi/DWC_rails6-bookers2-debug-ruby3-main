@@ -49,6 +49,15 @@ class User < ApplicationRecord
   def following?(user)
     followings.include?(user)
   end
+
+  # 検索方法(method)に応じたレコードを取得する
+  #
+  # @param content [String] 検索するキーワード
+  # @param method [String] 検索方法 ("perfect" | "forward" | "backward" | その他(部分検索))
+  # @return [ActiveRecord::Relation] 検索結果のレコード集合
+  def self.search_for(content, method)
+    search_by_attribute(:name, content, method)
+  end
   
   def get_profile_image
     (profile_image.attached?) ? profile_image : 'no_image.jpg'

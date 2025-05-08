@@ -6,9 +6,6 @@ class FavoritesController < ApplicationController
     # user_idが紐づいたfavoritesテーブルに、book_idを投稿された本で登録
     favorite = current_user.favorites.new(book_id: post_book.id)
     favorite.save
-
-    # 本のshowページにリダイレクト
-    redirect_to request.referer
   end
 
   def destroy
@@ -19,8 +16,5 @@ class FavoritesController < ApplicationController
     favorite = current_user.favorites.find_by(book_id: post_book.id)
     # 削除する
     favorite.destroy
-
-    # 本のshowページにリダイレクト
-    redirect_to request.referer
   end
 end

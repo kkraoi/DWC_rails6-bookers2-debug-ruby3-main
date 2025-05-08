@@ -24,7 +24,7 @@
           </td>
 
           <%# コメント数 %>
-          <td>
+          <td id="comment_counter">
             <p>コメント件数：<%= @book.book_comments.count %></p>
           </td>
 
@@ -37,7 +37,9 @@
       </table>
 
       <%# コメント欄 %>
-      <%= render "book_comments/index", book: @book %>
+      <div id="comment_index">
+        <%= render "book_comments/index", book: @book %>
+      </div>
 
       <%# コメント投稿フォーム %>
       <div>

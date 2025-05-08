@@ -9,14 +9,10 @@ class BookCommentsController < ApplicationController
     # コメントのbook_idを登録
     comment.book_id = post_book.id
     comment.save
-
-    # アクションを行う前の画面に遷移する
-    redirect_to request.referer
   end
 
   def destroy
     BookComment.find(params[:id]).destroy
-    redirect_to request.referer
   end
 
   private

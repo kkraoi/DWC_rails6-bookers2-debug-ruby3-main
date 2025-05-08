@@ -4,15 +4,16 @@ class BookCommentsController < ApplicationController
     post_book = Book.find(params[:book_id])
 
     # ユーザーに紐づいたコメントに、対象の本を紐づける
-    comment = current_user.book_comments.new(book_comment_params)
+    @comment = current_user.book_comments.new(book_comment_params)
 
     # コメントのbook_idを登録
-    comment.book_id = post_book.id
-    comment.save
+    @comment.book_id = post_book.id
+    @comment.save
   end
 
   def destroy
-    BookComment.find(params[:id]).destroy
+    @comment = BookComment.find(params[:id])
+    @comment.destroy
   end
 
   private

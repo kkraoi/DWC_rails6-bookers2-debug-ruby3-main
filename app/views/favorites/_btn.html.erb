@@ -1,11 +1,13 @@
 <% if book.favorited_by?(current_user) %>
   <%= link_to book_favorite_path(book), method: :delete, remote: true do %>
     <i class="fas fa-heart" aria-hidden="true" style="color: red;"></i>
-    <%= book.favorites.count %> いいね
+    <%= book.favorites.count %> いいね<br>
+    <%= book.week_favorites.count %> ウィークリーいいね
   <% end %>
 <% else %>
   <%= link_to book_favorite_path(book), method: :post, remote: true do %>
     <i class="fas fa-heart" aria-hidden="true"></i>
-    <%= book.favorites.count %> いいね
+    <%= book.favorites.count %> いいね<br>
+    <%= book.week_favorites.count %> ウィークリーいいね
   <% end %>
 <% end %>

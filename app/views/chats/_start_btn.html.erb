@@ -1,0 +1,4 @@
+<%# ユーザーshowページに居て、お互いにフォローし合ってないとリンクは表示されない %>
+<% if current_user != user && current_user.following?(user) && user.following?(current_user)  %>
+  <%= link_to 'chatを始める', chat_path(user.id), class: "ml-3" %>
+<% end %>

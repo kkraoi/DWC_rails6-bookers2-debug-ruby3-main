@@ -59,7 +59,7 @@ class ChatsController < ApplicationController
     # フォームから送信されたメッセージを取得し、現在のユーザーに関連付けて保存
     @chat = current_user.chats.new(chat_params)
 
-    # バリデーションに合格しない場合はエラーを表示
+    # バリデーションに合格しない場合はエラーを表示(= validate.html.erb を描画する)
     render :validate unless @chat.save
   end
 

@@ -28,8 +28,4 @@ class Book < ApplicationRecord
   def self.search_for(content, method)
     search_by_attribute(:title, content, method)
   end
-
-  def self.search_for(content, method)
-    search_by_attribute(:title, content, method)
-  end
 end

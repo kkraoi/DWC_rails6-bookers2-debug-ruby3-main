@@ -9,6 +9,8 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     @books = @user.books
     @book = Book.new
+
+    @total_views = @books.sum(&:impressionist_count)
   end
 
   def index

@@ -23,9 +23,14 @@
         </td>
 
         <%# コメント数 %>
-          <td>
-            <p>コメント件数：<%= book.book_comments.count %></p>
-          </td>
+        <td>
+          <p>コメント件数：<%= book.book_comments.count %></p>
+        </td>
+
+         <%# 閲覧数 %>
+        <td>
+          <%= render "shared/views_count", book: book %>
+        </td>
       </tr>
     <% end %>
   </tbody>

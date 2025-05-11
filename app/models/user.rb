@@ -9,6 +9,13 @@ class User < ApplicationRecord
   has_many :favorites, dependent: :destroy
   has_many :book_comments, dependent: :destroy
 
+  # DM機能に必要な関連
+  has_many :chats, dependent: :destroy
+  has_many :user_rooms, dependent: :destroy
+  has_many :rooms, through: :user_rooms
+
+  # has_many :rooms, through: :chats これはダメ。chatsにレコードが何もない場合、roomsとの関連がなくなってしまう。「ユーザーが参加しているルーム」にならず「ユーザーがメッセージを送信したルーム」になってしまい、参加しているがメッセージを送っていないルームは取得できなくなる。
+
   # フォローしている関連づけ：active_relationshipsという関連名で、follower_idを外部キーとしてRelationshipモデルと関連づけ。
   has_many :active_relationships, class_name: "Relationship", foreign_key: "follower_id", dependent: :destroy
 

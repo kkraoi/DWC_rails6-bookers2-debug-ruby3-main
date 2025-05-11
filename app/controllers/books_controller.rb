@@ -9,16 +9,13 @@ class BooksController < ApplicationController
     @book = Book.find(params[:id])
     @newbook = Book.new
     @book_comment = BookComment.new
+
+    # 同じセッションからは1回だけカウント
+    impressionist(@book, nil, unique: [:session_hash])
   end
 
   def index
     # コントローラで1週間絞り込みをする場合
-    # to = Time.current.at_end_of_day
-    # from = (to - 6.day).at_beginning_of_day
-    # @books = Book.includes(:favorites).sort_by { |book|
-    #   -book.favorites.where(created_at: from..to).count 
-    # }
-
     @books =  Book.includes(:favorites).sort_by { |book|
       -book.week_favorites.count
     }

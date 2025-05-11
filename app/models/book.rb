@@ -12,6 +12,10 @@ class Book < ApplicationRecord
   validates :title,presence:true
   validates :body,presence:true,length:{maximum:200}
 
+  # impressionistでアクセス数を記録しますよと宣言する。
+  # これだけで、Bookモデルの各レコード（投稿）ごとに、アクセスログが記録できるようになる。
+  is_impressionable
+
   # ユーザーのオブジェクトを代入し、favoritesテーブルにそのユーザーidが存在するか、真偽値を返す。
   #
   # @param param [User] ユーザーのオブジェクト
